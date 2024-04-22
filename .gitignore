@@ -4,13 +4,13 @@ node_modules
 package-lock.json
 
 # Ignore contents of videos folder
-/videos/*
+public/videos/*
 
 # Ignore contents of images folder
-/images/*
+public/images/*
 
 # Ignore contents of documents folder
-/documents/*
+public/documents/*
 
 prisma
 

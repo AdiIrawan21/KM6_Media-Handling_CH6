@@ -1,5 +1,4 @@
 const imagekit = require('../libs/imagekit');
-const imageKit = require('../libs/imagekit');
 
 module.exports = {
     // controller upload single image

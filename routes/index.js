@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
+// const multer = require('multer');
 
 const { image, video, file } = require('../libs/multer');
 
@@ -24,7 +24,7 @@ router.post('/upload/document', file.single('file'), storageFileSingle);
 // upload multiple file
 router.post('/upload/documents', file.array('file'), storageFileMultiple);
 
-//router imageKit
-router.post('/imagekit', multer.single('image'), imagekitUpload);
+//router hanlde proccess imageKit
+router.post('/imagekit', image.single('image'), imagekitUpload);
 
 module.exports = router;

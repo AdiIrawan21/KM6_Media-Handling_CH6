@@ -20,7 +20,7 @@ const generateStorage = (destination) => {
     });
 };
 
-// function untuk validasi tipe media
+// function untuk validasi/middleware tipe media
 const generateFileFilter = (mimetypes) => {
     return (req, file, callback) => {
         if (mimetypes.includes(file.mimetype)) {

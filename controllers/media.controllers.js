@@ -1,3 +1,6 @@
+const imagekit = require('../libs/imagekit');
+const imageKit = require('../libs/imagekit');
+
 module.exports = {
     // controller upload single image
     storageImageSingle: (req, res) => {
@@ -78,5 +81,30 @@ module.exports = {
                 file_url: fileUrls
             }
         });
+    },
+
+    // handle imageKit controllers
+    imagekitUpload: async (req, res) => {
+        try {
+            const stringFile = req.file.buffer.toString('base64');
+
+            const uploadFile = await imagekit.upload({
+                fileName: req.file.originalname,
+                file: stringFile
+            });
+
+            return res.status(200).json({
+                status: true,
+                message: 'success',
+                data: {
+                    name: uploadFile.name,
+                    url: uploadFile.url,
+                    type: uploadFile.fileType
+                }
+            });
+
+        } catch (err) {
+            next(err);
+        }
     }
 }

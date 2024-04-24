@@ -1,4 +1,6 @@
 const imagekit = require('../libs/imagekit');
+const path = require('path');
+const qr = require('qr-image');
 
 module.exports = {
     // controller upload single image
@@ -82,13 +84,15 @@ module.exports = {
         });
     },
 
-    // handle imageKit controllers
-    imagekitUpload: async (req, res) => {
+    // handle imageKit disimpan di server
+    imagekitUpload: async (req, res, next) => {
         try {
+
+
             const stringFile = req.file.buffer.toString('base64');
 
             const uploadFile = await imagekit.upload({
-                fileName: req.file.originalname,
+                fileName: Date.now() + path.extname(req.file.originalname),
                 file: stringFile
             });
 
@@ -101,6 +105,40 @@ module.exports = {
                     type: uploadFile.fileType
                 }
             });
+
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    // handle qr generate disimpan di server
+    generateQR: async (req, res, next) => {
+        try {
+
+            let { qr_data } = req.body;
+
+            if (!qr_data) {
+                return res.status(400).json({
+                    status: false,
+                    message: 'qr_Data is required',
+                    data: null
+                });
+            };
+
+            let qrCode = qr.imageSync(qr_data, { type: 'png' });
+
+            let { url } = await imagekit.upload({
+                fileName: Date.now() + '.png',
+                file: qrCode.toString('base64')
+            });
+
+            return res.status(200).json({
+                status: true,
+                message: 'success',
+                data: {
+                    url
+                }
+            })
 
         } catch (err) {
             next(err);

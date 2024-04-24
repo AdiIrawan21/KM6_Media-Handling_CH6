@@ -32,9 +32,12 @@ const generateFileFilter = (mimetypes) => {
     };
 };
 
+
 module.exports = {
-    // multer untuk images
-    image: multer({
+
+    // handle untuk penyimpanan ke storage
+
+    imageStorage: multer({
         storage: generateStorage('./public/images'),
         fileFilter: generateFileFilter([
             'image/png', 'image/jpg', 'image/jpeg'
@@ -44,8 +47,7 @@ module.exports = {
         }
     }),
 
-    // multer untuk videos
-    video: multer({
+    videoStorage: multer({
         storage: generateStorage('./public/videos'),
         fileFilter: generateFileFilter([
             'video/mp4', 'video/mpeg', 'video/mov'
@@ -55,10 +57,37 @@ module.exports = {
         }
     }),
 
-    // multer untuk files
-    file: multer({
+    fileStorage: multer({
         storage: generateStorage('./public/documents'),
         fileFilter: generateFileFilter([
+            'plain/text',
+            'application/pdf',
+            'application/vnd.ms-excel',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        ]),
+        onError: (err, next) => {
+            next(err);
+        }
+    }),
+
+    // handle untuk penyimpanan ke server
+
+    image: multer({
+        fileFilter: generateFileFilter([
+            'image/png',
+            'image/jpg',
+            'image/jpeg'
+        ]),
+        onError: (err, next) => {
+            next(err)
+        }
+    }),
+
+    file: multer({
+        fileFilter: generateFileFilter([
+            'plain/text',
             'application/pdf',
             'application/vnd.ms-excel',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',

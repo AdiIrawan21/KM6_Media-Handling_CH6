@@ -1,0 +1,22 @@
+### Penanganan Endpoint Auth register
+POST http://localhost:3000/api/v1/users/register
+Content-Type: application/json
+
+{
+    "first_name": "sabrina",
+    "last_name": "binar",
+    "email": "sabrina@gmail.com",
+    "password": "sabrina123"
+}
+
+### Penanganan endpoint update profile
+PUT http://localhost:3000/api/v1/users/1
+Content-Type: application/json
+
+{
+    "first_name": "sabrina",
+    "last_name": "binar",
+    "email": "sabrina@gmail.com",
+    "address": "Tangerang Selatan 1",
+    "occupation" : "backend engineer"
+}

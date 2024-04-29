@@ -32,7 +32,6 @@ const generateFileFilter = (mimetypes) => {
     };
 };
 
-
 module.exports = {
 
     // handle untuk penyimpanan ke storage
@@ -97,5 +96,17 @@ module.exports = {
         onError: (err, next) => {
             next(err);
         }
-    })
+    }),
+
+    // multer handle update avatar at users profile
+    // avatar: multer({
+    //     fileFilter: generateFileFilter([
+    //         'image/png',
+    //         'image/jpg',
+    //         'image/jpeg'
+    //     ]),
+    //     onError: (err, next) => {
+    //         next(err)
+    //     }
+    // }),
 };

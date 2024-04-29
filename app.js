@@ -15,6 +15,9 @@ app.use('/files', express.static('/public/files'));
 const mediaRouter = require('./routes');
 app.use('/api/v1', mediaRouter);
 
+const usersRouter = require('./routes/user.routes');
+app.use('/api/v1/', usersRouter);
+
 app.get('/', (req, res) => res.render('image'));
 
 
